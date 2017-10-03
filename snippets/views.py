@@ -13,6 +13,7 @@ class SnippetList(APIView):
     """
     List all snippets, or create a new snippet.
     """
+
     def get(self, request, format=None):
         snippets = Statistics.objects.all()
         serializer = StatisticsSerializer(snippets, many=True)
@@ -25,10 +26,12 @@ class SnippetList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class SnippetDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
+
     def get_object(self, pk):
         try:
             return Statistics.objects.get(pk=pk)
