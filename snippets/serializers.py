@@ -6,8 +6,8 @@ class StatisticsSerializer(serializers.Serializer):
     externalId = serializers.CharField(required=False, allow_blank=True, max_length=100)
     agentId = serializers.CharField(required=False, allow_blank=True, max_length=100)
     startDate = serializers.DateField()
-    numberOfEmails = serializers.IntegerField(read_only=True)
-    numberOfCalls = serializers.IntegerField(read_only=True)
+    numberOfEmails = serializers.IntegerField()
+    numberOfCalls = serializers.IntegerField()
     averageDuration = serializers.FloatField()
     isResolved = serializers.BooleanField(default=False)
     nps = serializers.FloatField()
@@ -22,10 +22,13 @@ class StatisticsSerializer(serializers.Serializer):
         """
         Update and return an existing `Snippet` instance, given the validated data.
         """
-        instance.title = validated_data.get('title', instance.title)
-        instance.code = validated_data.get('code', instance.code)
-        instance.linenos = validated_data.get('linenos', instance.linenos)
-        instance.language = validated_data.get('language', instance.language)
-        instance.style = validated_data.get('style', instance.style)
+        instance.externalId = validated_data.get('externalId', instance.externalId)
+        instance.agentId = validated_data.get('agentId', instance.agentId)
+        instance.startDate = validated_data.get('startDate', instance.startDate)
+        instance.numberOfEmails = validated_data.get('numberOfEmails', instance.numberOfEmails)
+        instance.numberOfCalls = validated_data.get('numberOfCalls', instance.numberOfCalls)
+        instance.averageDuration = validated_data.get('averageDuration', instance.averageDuration)
+        instance.isResolved = validated_data.get('isResolved', instance.isResolved)
+        instance.nps = validated_data.get('nps', instance.nps)
         instance.save()
         return instance
