@@ -55,3 +55,14 @@ class SnippetDetail(APIView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class Analyze(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+
+    def get(self, request, format=None):
+        snippets = Statistics.objects.all()
+        serializer = StatisticsSerializer(snippets, many=True)
+        return Response(serializer.data)
+
