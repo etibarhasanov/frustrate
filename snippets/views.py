@@ -15,6 +15,13 @@ class SnippetList(APIView):
     """
 
     def get(self, request, format=None):
+        # df = pd.DataFrame(list(Statistics.objects.all().values()))
+        # df_x=df.iloc[:,[0,1,2,3,4,6,7,8]]
+        # df_y=df.iloc[:,5]
+        # x_train, x_test, y_train, y_test = train_test_split(df_x, df_y, test_size=0.2, random_state=4)
+        # rf=RandomForestClassifier(n_estimators=100)
+        # rf.fit(x_train,y_train)
+
         snippets = Statistics.objects.all()
         serializer = StatisticsSerializer(snippets, many=True)
         return Response(serializer.data)

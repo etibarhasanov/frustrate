@@ -8,9 +8,10 @@ class StatisticsSerializer(serializers.Serializer):
     startDate = serializers.DateField()
     numberOfEmails = serializers.IntegerField()
     numberOfCalls = serializers.IntegerField()
-    averageDuration = serializers.FloatField()
+    averageDuration = serializers.IntegerField()
+    averageHoldingDuration = serializers.IntegerField()
     isResolved = serializers.BooleanField(default=False)
-    nps = serializers.FloatField()
+    nps = serializers.IntegerField()
 
     def create(self, validated_data):
         """
@@ -28,6 +29,7 @@ class StatisticsSerializer(serializers.Serializer):
         instance.numberOfEmails = validated_data.get('numberOfEmails', instance.numberOfEmails)
         instance.numberOfCalls = validated_data.get('numberOfCalls', instance.numberOfCalls)
         instance.averageDuration = validated_data.get('averageDuration', instance.averageDuration)
+        instance.averageHoldingDuration=validated_data.get('averageHoldingDuration',instance.averageHoldingDuration)
         instance.isResolved = validated_data.get('isResolved', instance.isResolved)
         instance.nps = validated_data.get('nps', instance.nps)
         instance.save()

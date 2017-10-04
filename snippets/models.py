@@ -13,9 +13,10 @@ class Statistics(models.Model):
     startDate = models.DateField()
     numberOfEmails = models.IntegerField()
     numberOfCalls = models.IntegerField()
-    averageDuration = models.FloatField()
+    averageDuration = models.IntegerField()
+    averageHoldingDuration = models.IntegerField(default = 30)
     isResolved = models.BooleanField(default=False)
-    nps = models.FloatField()
+    nps = models.IntegerField()
 
     class Meta:
         ordering = ('externalId',)
