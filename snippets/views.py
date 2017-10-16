@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from sklearn.ensemble import RandomForestClassifier
 import numpy as np
-import pandas as pd
+#import pandas as pd
 import pickle
 
 
@@ -41,15 +41,15 @@ class SnippetList(APIView):
         serializer = StatisticsSerializer(data=request.data)
         if serializer.is_valid():
             pickle_in = open('data.pkl', 'rb')
-            rf = pickle.load(pickle_in)
+            rf = pickle.load(pickle_in, encoding='latin1')
             serializer.save()
-            print rf.predict([[serializer.data['agentId'],
+            print (rf.predict([[serializer.data['agentId'],
                                serializer.data['averageDuration'],
                                serializer.data['averageHoldingDuration'],
                                serializer.data['externalId'],
                                serializer.data['isResolved'],
                                serializer.data['numberOfCalls'],
-                               serializer.data['numberOfEmails']]])
+                               serializer.data['numberOfEmails']]]))
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
